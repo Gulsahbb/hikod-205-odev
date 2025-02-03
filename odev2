@@ -1,0 +1,65 @@
+void main() {
+  // 1. Dikdörtgenin Alanını Hesaplayan Fonksiyon
+  double uzunKenar = 4.76;
+  double kısaKenar = 9.54;
+  double alan = alanHesapla(uzunKenar, kısaKenar);
+  print("Dikdörtgenin alanı: $alan");
+
+  // 2. Carp Fonksiyonu
+  int sonuc = carp(5, 3);
+  print("Sonuç: $sonuc");  // Beklenen sonuç: 20
+
+  // 3. Liste Eleman Silme Fonksiyonu
+  List<int> sayilar = [1, 2, 3, 4, 5];
+  print("Liste başlangıç: $sayilar");
+  listeElemanSil(sayilar, 3);
+  print("Liste sonrasında: $sayilar");
+
+  // 4. Şekiller Class'ı ve Objeleri
+  Shape circle = Shape("Çember");
+  Shape square = Shape("Kare");
+  Shape rectangle = Shape("Dikdörtgen");
+  Shape triangle = Shape("Üçgen");
+  Shape oval = Shape("Oval");
+
+  circle.draw();
+  square.draw();
+  rectangle.draw();
+  triangle.draw();
+  oval.draw();
+}
+
+// 1. Dikdörtgenin Alanını Hesaplayan Fonksiyon
+double alanHesapla(double uzunKenar, double kısaKenar) {
+  return uzunKenar * kısaKenar;
+}
+
+// 2. Carp Fonksiyonu
+int carp(int a, int b) {
+  int multiplyByTwo(int x) {
+    return x * 2;
+  }
+
+  int result = a;
+  for (int i = 1; i < b; i++) {
+    result = multiplyByTwo(result);
+  }
+
+  return result;
+}
+
+// 3. Liste Eleman Silme Fonksiyonu
+void listeElemanSil(List<int> liste, int deger) {
+  liste.remove(deger);
+}
+
+// 4. Shape Class'ı
+class Shape {
+  String name;
+
+  Shape(this.name);
+
+  void draw() {
+    print("Çizilen şekil: $name");
+  }
+}
