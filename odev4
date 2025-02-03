@@ -1,0 +1,152 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: PersonalitySurveyPage(),
+    );
+  }
+}
+
+class PersonalitySurveyPage extends StatefulWidget {
+  @override
+  _PersonalitySurveyPageState createState() => _PersonalitySurveyPageState();
+}
+
+class _PersonalitySurveyPageState extends State<PersonalitySurveyPage> {
+  // Form verileri
+  TextEditingController nameController = TextEditingController();
+  TextEditingController surnameController = TextEditingController();
+  String? selectedGender;
+  bool isAdult = false;
+  bool isSmoker = false;
+  double dailyCigarettes = 0;
+
+  // Cinsiyet seçimi için liste
+  List<String> genderOptions = ['Erkek', 'Kadın', 'Diğer'];
+
+  // Formu gönderme işlemi
+  void submitForm() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Bilgileriniz"),
+          content: Text(
+            "Ad: ${nameController.text}\nSoyad: ${surnameController.text}\nCinsiyet: $selectedGender\nReşit: ${isAdult ? 'Evet' : 'Hayır'}\nSigara Kullanıyor: ${isSmoker ? 'Evet' : 'Hayır'}\nGünlük Sigara Sayısı: $dailyCigarettes",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text("Tamam"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Kişilik Anketi"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Ad ve Soyad TextField'ları
+            TextField(
+              controller: nameController,
+              decoration: InputDecoration(labelText: 'Adınız'),
+            ),
+            TextField(
+              controller: surnameController,
+              decoration: InputDecoration(labelText: 'Soyadınız'),
+            ),
+            
+            // Cinsiyet Seçimi
+            DropdownButton<String>(
+              value: selectedGender,
+              hint: Text("Cinsiyetinizi Seçin"),
+              onChanged: (newValue) {
+                setState(() {
+                  selectedGender = newValue;
+                });
+              },
+              items: genderOptions.map((gender) {
+                return DropdownMenuItem(
+                  value: gender,
+                  child: Text(gender),
+                );
+              }).toList(),
+            ),
+
+            // Reşit Olma Durumu (Checkbox)
+            Row(
+              children: [
+                Checkbox(
+                  value: isAdult,
+                  onChanged: (value) {
+                    setState(() {
+                      isAdult = value!;
+                    });
+                  },
+                ),
+                Text('Reşit misiniz?'),
+              ],
+            ),
+            
+            // Sigara Kullanımı Durumu (Switch)
+            Row(
+              children: [
+                Switch(
+                  value: isSmoker,
+                  onChanged: (value) {
+                    setState(() {
+                      isSmoker = value;
+                    });
+                  },
+                ),
+                Text('Sigara kullanıyor musunuz?'),
+              ],
+            ),
+
+            // Sigara kullanıyorsa Slider'ı gösterme
+            if (isSmoker)
+              Column(
+                children: [
+                  Text("Günlük Sigara Sayısı: ${dailyCigarettes.toStringAsFixed(0)}"),
+                  Slider(
+                    value: dailyCigarettes,
+                    min: 0,
+                    max: 50,
+                    divisions: 50,
+                    onChanged: (value) {
+                      setState(() {
+                        dailyCigarettes = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            
+            // Bilgilerimi Gönder Butonu
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: submitForm,
+              child: Text("Bilgilerimi Gönder"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
