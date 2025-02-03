@@ -1,0 +1,39 @@
+void main() {
+  // 1. Farklı veri tiplerinde değişkenler tanımlama
+  int myInt = 30;
+  String myString = "Merhaba, Kodluyoruz!!";
+  double myDouble = 3.24;
+  bool myBool = true;
+  dynamic myDynamic = "Her türde veri alabilirim!";
+  String myChar = "F";
+
+  // 2. Değişkenlerin konsola bastırma
+  print("Int Değeri: $myInt");
+  print("String Değeri: $myString");
+  print("Double Değeri: $myDouble");
+  print("Bool Değeri: $myBool");
+  print("Dynamic Değeri: $myDynamic");
+  print("Char Değeri: $myChar");
+
+  // 3. CamelCase, Snake_case ve PascalCase değişkenler
+  int myIntVariable = 17; // CamelCase
+  String my_string_variable = "Merhaba Hi Kod 205!"; // Snake_case
+  double MyDoubleVariable = 3.14; // PascalCase
+
+  // Konsola bastırma
+  print("CamelCase: $myIntVariable");
+  print("Snake_case: $my_string_variable");
+  print("PascalCase: $MyDoubleVariable");
+
+  // 4. Bilgileri değişkenlere atayıp bastırma
+  String myFirstName = "Gülşah";
+  String myLastName = "Başkurt";
+  int myAge = 23;
+  bool isAdult = true; // Eğer 18 yaşından büyük veya eşitse true
+
+  // Bilgileri konsola bastırma
+  print("Adım: $myFirstName");
+  print("Soyadım: $myLastName");
+  print("Yaşım: $myAge");
+  print("Reşit olma durumu: $isAdult");
+}
